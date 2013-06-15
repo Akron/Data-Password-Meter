@@ -205,13 +205,6 @@ __END__
 Data::Password::Meter - Check the strength of passwords
 
 
-=head1 DESCRIPTION
-
-Check the strength of a password. The scoring is based on
-L<Passwordmeter|http://www.geekwisdom.com/js/passwordmeter.js>
-by Steve Moitozo.
-
-
 =head1 SYNOPSIS
 
   my $pwdm = Data::Password::Meter->new(28);
@@ -224,6 +217,13 @@ by Steve Moitozo.
   else {
     warn $pwdm->errstr;
   };
+
+
+=head1 DESCRIPTION
+
+Check the strength of a password. The scoring is based on
+L<Passwordmeter|http://www.geekwisdom.com/js/passwordmeter.js>
+by Steve Moitozo.
 
 
 =head1 ATTRIBUTES
