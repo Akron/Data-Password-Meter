@@ -18,7 +18,7 @@ WriteMakefile(
     'utf8'         => 0,
     'bytes'        => 0
   },
-  LICENSE      => 'perl',
+  LICENSE      => 'mit',
   META_MERGE   => {
     requires  => { perl => 5.008 },
     resources => {
