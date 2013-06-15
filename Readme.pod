@@ -9,7 +9,7 @@ Data::Password::Meter - Check the strength of passwords
 
 Check the strength of a password. The scoring is based on
 L<Passwordmeter|http://www.geekwisdom.com/js/passwordmeter.js>
-by Steve Moitozo. B<Note:> This does not check the password against a dictionary.
+by Steve Moitozo.
 
 
 =head1 SYNOPSIS
