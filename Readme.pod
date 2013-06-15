@@ -1,0 +1,147 @@
+=pod
+
+=head1 NAME
+
+Data::Password::Meter - Check the strength of passwords
+
+
+=head1 DESCRIPTION
+
+Check the strength of a password. The scoring is based on
+L<Passwordmeter|http://www.geekwisdom.com/js/passwordmeter.js>
+by Steve Moitozo. B<Note:> This does not check the password against a dictionary.
+
+
+=head1 SYNOPSIS
+
+  my $pwdm = Data::Password::Meter->new(28);
+
+  # Check a password
+  if ($pwdm->strong('s3cur3-p4ssw0rd')) {
+    print "The password is strong enough!\n";
+    print 'Scored ' . $pwdm->score . ' points!';
+  }
+  else {
+    warn $pwdm->errstr;
+  };
+
+
+=head1 ATTRIBUTES
+
+=head2 errstr
+
+  print $pwdm->errstr;
+
+The L<error string|/ERROR STRINGS> of the last failing check.
+
+
+=head2 score
+
+  print $pwdm->score;
+
+The score of the last check.
+
+
+=head2 threshold
+
+  print $pwdm->threshold;
+  $pwdm->threshold(28);
+
+The scoring threshold,
+the determining factor when a password is too weak.
+Every password that is below this threshold
+is considered weak.
+Defaults to a score of C<25>.
+
+
+=head1 METHODS
+
+=head2 new
+
+  my $pwd = Data::Password::Meter->new(28);
+
+Constructs a new password check object.
+Accepts an optional value for the L<threshold|/threshold>.
+
+
+=head2 strong
+
+
+  if ($pwdm->strong('mypassword')) {
+    print 'This password is strong!';
+  }
+  else {
+    print 'This password is weak!';
+  };
+
+Checks a password for strength.
+Returns a false value in case the password
+is considered to be weak.
+
+
+=head1 ERROR STRINGS
+
+Possible error strings are:
+
+=over 2
+
+=item *
+
+There is no password given
+
+=item *
+
+Passwords are not allowed to contain control sequences
+
+=item *
+
+Passwords are not allowed to consist of repeating characters only
+
+=item *
+
+The password is too short
+
+=item *
+
+The password should contain special characters
+
+=item *
+
+The password should contain combinations of letters, numbers and special characters
+
+=item *
+
+The password is too short and should contain special characters
+
+=item *
+
+The password is too short and should contain combinations of letters, numbers and special characters
+
+=item *
+
+The password is too short, should contain special characters and should contain combinations of letters, numbers and special characters
+
+=item *
+
+The password should contain special characters and should contain combinations of letters, numbers and special characters
+
+=back
+
+
+=head1 DEPENDENCIES
+
+No dependencies other than core.
+
+
+=head1 AVAILABILITY
+
+  https://github.com/Akron/Data-Password-Meter
+
+
+=head1 COPYRIGHT AND LICENSE
+
+Copyright (C) 2006, Steve Moitozo, (C) 2013, L<Nils Diewald|http://nils-diewald.de>.
+
+Licensed under the MIT License
+
+=cut

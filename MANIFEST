@@ -1,0 +1,6 @@
+lib/Data/Password/Meter.pm
+t/password_meter.t
+Changes
+MANIFEST
+LICENSE
+Makefile.PL
