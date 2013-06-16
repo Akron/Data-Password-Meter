@@ -3,7 +3,7 @@ use strict;
 use warnings;
 
 
-our $VERSION = 0.02;
+our $VERSION = 0.03;
 
 
 # Constructor
@@ -307,7 +307,8 @@ The password should contain special characters
 
 =item *
 
-The password should contain combinations of letters, numbers and special characters
+The password should contain combinations of letters,
+numbers and special characters
 
 =item *
 
@@ -315,15 +316,18 @@ The password is too short and should contain special characters
 
 =item *
 
-The password is too short and should contain combinations of letters, numbers and special characters
+The password is too short and should contain combinations of letters,
+numbers and special characters
 
 =item *
 
-The password is too short, should contain special characters and should contain combinations of letters, numbers and special characters
+The password is too short, should contain special characters and
+should contain combinations of letters, numbers and special characters
 
 =item *
 
-The password should contain special characters and should contain combinations of letters, numbers and special characters
+The password should contain special characters and should contain
+combinations of letters, numbers and special characters
 
 =back
 
@@ -340,7 +344,8 @@ No dependencies other than core.
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright (C) 2006, Steve Moitozo, (C) 2013, L<Nils Diewald|http://nils-diewald.de>.
+Copyright (C) 2006, Steve Moitozo,
+(C) 2013, L<Nils Diewald|http://nils-diewald.de>.
 
 Licensed under the MIT License
 
