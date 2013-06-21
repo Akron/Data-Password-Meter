@@ -1,5 +1,5 @@
 #!/usr/bin/env perl
-use 5.008;
+use 5.010001;
 use strict;
 use warnings;
 use ExtUtils::MakeMaker;
@@ -10,7 +10,7 @@ WriteMakefile(
   ABSTRACT     => 'Check the strength of passwords',
   VERSION_FROM => 'lib/Data/Password/Meter.pm',
   BUILD_REQUIRES => {
-    'Test::More'   => 0
+    'Test::More' => 0
   },
   PREREQ_PM => {
     'strict'       => 0,
@@ -20,13 +20,13 @@ WriteMakefile(
   },
   LICENSE      => 'mit',
   META_MERGE   => {
-    requires  => { perl => 5.008 },
+    requires  => { perl => '5.010001' },
     resources => {
       license     => 'http://www.opensource.org/licenses/MIT',
       repository  => 'https://github.com/Akron/Data-Password-Meter'
     }
   },
-  MIN_PERL_VERSION => 5.008,
+  MIN_PERL_VERSION => '5.010001',
   test => {
     TESTS => 't/*.t'
   }

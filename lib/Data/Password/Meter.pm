@@ -3,7 +3,7 @@ use strict;
 use warnings;
 
 
-our $VERSION = 0.03;
+our $VERSION = 0.04;
 
 
 # Constructor
@@ -79,7 +79,7 @@ sub strong {
   };
 
   # Control characters
-  if ($pwd =~ /[\n\t]/) {
+  if ($pwd =~ m/[\n\s]/) {
     $self->[2] = 'control symbols';
     return;
   };

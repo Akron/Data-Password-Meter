@@ -1,3 +1,6 @@
+0.04 2013-06-21
+        - Make 5.10.1 a dependency.
+
 0.03 2013-06-16
         - Fixed Makefile.PL bug.
 
