@@ -28,11 +28,18 @@ by Steve Moitozo.
 
 =head1 ATTRIBUTES
 
+=head2 err
+
+  print $pwdm->err;
+
+The L<error code|/ERROR MESSAGES> of the last failing check.
+
+
 =head2 errstr
 
   print $pwdm->errstr;
 
-The L<error string|/ERROR STRINGS> of the last failing check.
+The L<error string|/ERROR MESSAGES> of the last failing check.
 
 
 =head2 score
@@ -66,7 +73,6 @@ Accepts an optional value for the L<threshold|/threshold>.
 
 =head2 strong
 
-
   if ($pwdm->strong('mypassword')) {
     print 'This password is strong!';
   }
@@ -79,51 +85,55 @@ Returns a false value in case the password
 is considered to be weak.
 
 
-=head1 ERROR STRINGS
+=head1 ERROR MESSAGES
 
-Possible error strings are:
+Possible error codes and strings are:
 
 =over 2
 
 =item *
 
-There is no password given
+1. There is no password given
 
 =item *
 
-Passwords are not allowed to contain control sequences
+2. Passwords are not allowed to contain control sequences
 
 =item *
 
-Passwords are not allowed to consist of repeating characters only
+3. Passwords are not allowed to consist of repeating characters only
 
 =item *
 
-The password is too short
+4. The password is too short
 
 =item *
 
-The password should contain special characters
+5. The password should contain special characters
 
 =item *
 
-The password should contain combinations of letters, numbers and special characters
+6. The password should contain combinations of letters,
+numbers and special characters
 
 =item *
 
-The password is too short and should contain special characters
+7. The password is too short and should contain special characters
 
 =item *
 
-The password is too short and should contain combinations of letters, numbers and special characters
+8. The password is too short and should contain combinations of letters,
+numbers and special characters
 
 =item *
 
-The password is too short, should contain special characters and should contain combinations of letters, numbers and special characters
+9. The password should contain special characters and should contain
+combinations of letters, numbers and special characters
 
 =item *
 
-The password should contain special characters and should contain combinations of letters, numbers and special characters
+10. The password is too short, should contain special characters and
+should contain combinations of letters, numbers and special characters
 
 =back
 
@@ -140,7 +150,8 @@ No dependencies other than core.
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright (C) 2006, Steve Moitozo, (C) 2013, L<Nils Diewald|http://nils-diewald.de>.
+Copyright (C) 2006, Steve Moitozo,
+(C) 2013-2014, L<Nils Diewald|http://nils-diewald.de>.
 
 Licensed under the MIT License
 

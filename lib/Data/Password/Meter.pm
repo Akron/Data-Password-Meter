@@ -3,7 +3,29 @@ use strict;
 use warnings;
 
 
-our $VERSION = 0.04;
+our $VERSION = 0.05;
+
+
+# Error messages
+my $S = 'The password ';
+my @PART = (
+  'is too short',
+  'should contain special characters',
+  'should contain combinations of letters, numbers and special characters'
+);
+our @ERR = (
+  undef,
+  'There is no password given',
+  'Passwords are not allowed to contain control sequences',
+  'Passwords are not allowed to consist of repeating characters only',
+  $S . $PART[0],
+  $S . $PART[1],
+  $S . $PART[2],
+  $S . $PART[0] . ' and ' . $PART[1],
+  $S . $PART[0] . ' and ' . $PART[2],
+  $S . $PART[1] . ' and ' . $PART[2],
+  $S . $PART[0] . ', ' . $PART[1] . ' and ' . $PART[2]
+);
 
 
 # Constructor
@@ -16,44 +38,39 @@ sub new {
 };
 
 
+# Error code
+sub err {
+  my $self = shift;
+  return 0 unless $self->[2];
+
+  # 1. No password is given
+  # 2. Control systems
+  # 3. Only repeating characters
+  # 4. too short
+  # 5. should contain special characters
+  # 6. should contain combinations of letters, numbers and special characters
+  return $self->[2] if @$self == 3;
+
+  # Combinations of errors
+  if (@$self == 4) {
+    return 7 if $self->[2] == 4 && $self->[3] == 5;
+    return 8 if $self->[2] == 4 && $self->[3] == 6;
+    return 9 if $self->[2] == 5 && $self->[3] == 6;
+  };
+
+  return 10;
+};
+
+
 # Error string
 sub errstr {
-  my $self = shift;
-  return '' unless $self->[2];
-
-  # Control systems
-  if ($self->[2] eq 'control symbols') {
-    return 'Passwords are not allowed to contain control sequences';
-  }
-
-  # Only repeating characters
-  elsif ($self->[2] eq 'repeating character') {
-    return 'Passwords are not allowed to consist of repeating characters only';
-  }
-
-  # No password is given
-  elsif ($self->[2] eq 'no password') {
-    return 'There is no password given'
-  }
-
-  # Some errors
-  else {
-    my $str = 'The password ';
-
-    # Reformat error strings
-    # too short - no special characters - no combinations
-    $str .= join '; ', @$self[2 .. $#{$self}];
-    $str =~ s/; ([^;]+?)$/ and $1/ if @$self > 3;
-    $str =~ tr/;/,/;
-
-    return $str;
-  };
+  return $ERR[$_[0]->err];
 };
 
 
 # Score
 sub score {
-  shift->[1];
+  $_[0]->[1];
 };
 
 
@@ -74,19 +91,19 @@ sub strong {
 
   # No password is too weak
   unless ($pwd) {
-    $self->[2] = 'no password';
+    $self->[2] = 1;
     return;
   };
 
   # Control characters
   if ($pwd =~ m/[\n\s]/) {
-    $self->[2] = 'control symbols';
+    $self->[2] = 2;
     return;
   };
 
   # Only one repeating character
   if ($pwd =~ /^(.)\1*$/) {
-    $self->[2] = 'repeating character';
+    $self->[2] = 3;
     return;
   };
 
@@ -120,7 +137,7 @@ sub strong {
 
   # Password is too short
   else {
-    push @$self, 'is too short';
+    push @$self, 4;
   };
 
   # Letters
@@ -156,7 +173,7 @@ sub strong {
     };
   }
   else {
-    push @$self, 'should contain special characters';
+    push @$self, 5;
   };
 
   # Scoring is not enough to succeed
@@ -181,8 +198,7 @@ sub strong {
     $score += 2;
   };
 
-  push @$self, 'should contain combinations of letters, ' .
-               'numbers and special characters';
+  push @$self, 6;
 
   $self->[1] = $score;
   return if $score < $self->threshold;
@@ -228,11 +244,18 @@ by Steve Moitozo.
 
 =head1 ATTRIBUTES
 
+=head2 err
+
+  print $pwdm->err;
+
+The L<error code|/ERROR MESSAGES> of the last failing check.
+
+
 =head2 errstr
 
   print $pwdm->errstr;
 
-The L<error string|/ERROR STRINGS> of the last failing check.
+The L<error string|/ERROR MESSAGES> of the last failing check.
 
 
 =head2 score
@@ -266,7 +289,6 @@ Accepts an optional value for the L<threshold|/threshold>.
 
 =head2 strong
 
-
   if ($pwdm->strong('mypassword')) {
     print 'This password is strong!';
   }
@@ -279,55 +301,55 @@ Returns a false value in case the password
 is considered to be weak.
 
 
-=head1 ERROR STRINGS
+=head1 ERROR MESSAGES
 
-Possible error strings are:
+Possible error codes and strings are:
 
 =over 2
 
 =item *
 
-There is no password given
+1. There is no password given
 
 =item *
 
-Passwords are not allowed to contain control sequences
+2. Passwords are not allowed to contain control sequences
 
 =item *
 
-Passwords are not allowed to consist of repeating characters only
+3. Passwords are not allowed to consist of repeating characters only
 
 =item *
 
-The password is too short
+4. The password is too short
 
 =item *
 
-The password should contain special characters
+5. The password should contain special characters
 
 =item *
 
-The password should contain combinations of letters,
+6. The password should contain combinations of letters,
 numbers and special characters
 
 =item *
 
-The password is too short and should contain special characters
+7. The password is too short and should contain special characters
 
 =item *
 
-The password is too short and should contain combinations of letters,
+8. The password is too short and should contain combinations of letters,
 numbers and special characters
 
 =item *
 
-The password is too short, should contain special characters and
-should contain combinations of letters, numbers and special characters
-
-=item *
-
-The password should contain special characters and should contain
+9. The password should contain special characters and should contain
 combinations of letters, numbers and special characters
+
+=item *
+
+10. The password is too short, should contain special characters and
+should contain combinations of letters, numbers and special characters
 
 =back
 
@@ -345,7 +367,7 @@ No dependencies other than core.
 =head1 COPYRIGHT AND LICENSE
 
 Copyright (C) 2006, Steve Moitozo,
-(C) 2013, L<Nils Diewald|http://nils-diewald.de>.
+(C) 2013-2014, L<Nils Diewald|http://nils-diewald.de>.
 
 Licensed under the MIT License
 
