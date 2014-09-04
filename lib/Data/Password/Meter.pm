@@ -3,7 +3,7 @@ use strict;
 use warnings;
 
 
-our $VERSION = 0.05;
+our $VERSION = 0.06;
 
 
 # Error messages
@@ -43,12 +43,6 @@ sub err {
   my $self = shift;
   return 0 unless $self->[2];
 
-  # 1. No password is given
-  # 2. Control systems
-  # 3. Only repeating characters
-  # 4. too short
-  # 5. should contain special characters
-  # 6. should contain combinations of letters, numbers and special characters
   return $self->[2] if @$self == 3;
 
   # Combinations of errors
@@ -64,7 +58,7 @@ sub err {
 
 # Error string
 sub errstr {
-  return $ERR[$_[0]->err];
+  return $_[1] ? $ERR[$_[1]] : $ERR[$_[0]->err];
 };
 
 
@@ -254,8 +248,10 @@ The L<error code|/ERROR MESSAGES> of the last failing check.
 =head2 errstr
 
   print $pwdm->errstr;
+  print $pwdm->errstr(4);
 
-The L<error string|/ERROR MESSAGES> of the last failing check.
+The L<error string|/ERROR MESSAGES> of the last failing check,
+or, in case an error code is passed, the corresponding message.
 
 
 =head2 score

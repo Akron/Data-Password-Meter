@@ -1,3 +1,6 @@
+0.06 2014-09-04
+        - Support error codes for string responses.
+
 0.05 2014-08-16
         - Added error codes.
 

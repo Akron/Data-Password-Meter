@@ -87,4 +87,15 @@ ok($pwd->strong("aA!.+!.+"), 'Too weak');
 is($pwd->score, 32, 'Score');
 
 
+is($pwd->errstr(1), 'There is no password given', 'Error code 1');
+is($pwd->errstr(2), 'Passwords are not allowed to contain control sequences', 'Error code 2');
+is($pwd->errstr(3), 'Passwords are not allowed to consist of repeating characters only', 'Error code 3');
+is($pwd->errstr(4), 'The password is too short', 'Error code 4');
+is($pwd->errstr(5), 'The password should contain special characters', 'Error code 5');
+is($pwd->errstr(6), 'The password should contain combinations of letters, numbers and special characters', 'Error code 6');
+is($pwd->errstr(7), 'The password is too short and should contain special characters', 'Error code 7');
+is($pwd->errstr(8), 'The password is too short and should contain combinations of letters, numbers and special characters', 'Error code 8');
+is($pwd->errstr(9), 'The password should contain special characters and should contain combinations of letters, numbers and special characters', 'Error code 9');
+is($pwd->errstr(10), 'The password is too short, should contain special characters and should contain combinations of letters, numbers and special characters', 'Error code 10');
+
 done_testing;

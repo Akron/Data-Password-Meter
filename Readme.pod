@@ -38,8 +38,10 @@ The L<error code|/ERROR MESSAGES> of the last failing check.
 =head2 errstr
 
   print $pwdm->errstr;
+  print $pwdm->errstr(4);
 
-The L<error string|/ERROR MESSAGES> of the last failing check.
+The L<error string|/ERROR MESSAGES> of the last failing check,
+or, in case an error code is passed, the corresponding message.
 
 
 =head2 score
