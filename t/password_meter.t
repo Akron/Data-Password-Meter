@@ -83,7 +83,7 @@ is($pwd->err, 8, 'Error code');
 
 # Fine
 $pwd->threshold(25);
-ok($pwd->strong("aA!.+!.+"), 'Too weak');
+ok($pwd->strong("aA!.+!.+"), 'Fine');
 is($pwd->score, 32, 'Score');
 
 
@@ -97,5 +97,16 @@ is($pwd->errstr(7), 'The password is too short and should contain special charac
 is($pwd->errstr(8), 'The password is too short and should contain combinations of letters, numbers and special characters', 'Error code 8');
 is($pwd->errstr(9), 'The password should contain special characters and should contain combinations of letters, numbers and special characters', 'Error code 9');
 is($pwd->errstr(10), 'The password is too short, should contain special characters and should contain combinations of letters, numbers and special characters', 'Error code 10');
+
+
+# Fine
+ok(!$pwd->err, 'Last test was not failing');
+ok(!$pwd->strong("!!!!"), 'Too weak');
+is($pwd->score, 0, 'Score');
+is($pwd->err, 3, 'Last test was failing');
+ok($pwd->strong("kjhgnjgbrjz5bt/Hhgh!"), 'Fine');
+ok(!$pwd->err, 'Last test was fine');
+is($pwd->errstr, '', 'Last test was fine');
+
 
 done_testing;

@@ -1,3 +1,6 @@
+0.07 2015-09-21
+        - Return meaningful codes on success.
+
 0.06 2014-09-04
         - Support error codes for string responses.
 

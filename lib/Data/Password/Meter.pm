@@ -2,8 +2,10 @@ package Data::Password::Meter;
 use strict;
 use warnings;
 
+# Todo:
+# - see: https://en.wikipedia.org/wiki/Password_strength#NIST_Special_Publication_800-63
 
-our $VERSION = 0.06;
+our $VERSION = '0.07';
 
 
 # Error messages
@@ -58,7 +60,7 @@ sub err {
 
 # Error string
 sub errstr {
-  return $_[1] ? $ERR[$_[1]] : $ERR[$_[0]->err];
+  return $_[1] ? ($ERR[$_[1]] // '') : ($ERR[$_[0]->err] // '');
 };
 
 
@@ -242,7 +244,8 @@ by Steve Moitozo.
 
   print $pwdm->err;
 
-The L<error code|/ERROR MESSAGES> of the last failing check.
+The L<error code|/ERROR MESSAGES> of the last check.
+Returns a C<false> value, if the last check was successful.
 
 
 =head2 errstr
@@ -250,8 +253,9 @@ The L<error code|/ERROR MESSAGES> of the last failing check.
   print $pwdm->errstr;
   print $pwdm->errstr(4);
 
-The L<error string|/ERROR MESSAGES> of the last failing check,
+The L<error string|/ERROR MESSAGES> of the last check,
 or, in case an error code is passed, the corresponding message.
+Returns an empty string, if the last check was successful.
 
 
 =head2 score
@@ -363,7 +367,7 @@ No dependencies other than core.
 =head1 COPYRIGHT AND LICENSE
 
 Copyright (C) 2006, Steve Moitozo,
-(C) 2013-2014, L<Nils Diewald|http://nils-diewald.de>.
+(C) 2013-2015, L<Nils Diewald|http://nils-diewald.de>.
 
 Licensed under the MIT License
 
