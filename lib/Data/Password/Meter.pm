@@ -5,7 +5,7 @@ use warnings;
 # Todo:
 # - see: https://en.wikipedia.org/wiki/Password_strength#NIST_Special_Publication_800-63
 
-our $VERSION = '0.07';
+our $VERSION = '0.08';
 
 
 # Error messages
@@ -92,7 +92,7 @@ sub strong {
   };
 
   # Control characters
-  if ($pwd =~ m/[\n\s]/) {
+  if ($pwd =~ m/[\a\f\v\n\r\t]/) {
     $self->[2] = 2;
     return;
   };
@@ -367,7 +367,7 @@ No dependencies other than core.
 =head1 COPYRIGHT AND LICENSE
 
 Copyright (C) 2006, Steve Moitozo,
-(C) 2013-2015, L<Nils Diewald|http://nils-diewald.de>.
+(C) 2013-2016, L<Nils Diewald|http://nils-diewald.de>.
 
 Licensed under the MIT License
 

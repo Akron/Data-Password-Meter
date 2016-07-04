@@ -17,6 +17,8 @@ ok(!$pwd->strong("Pass\tword"), 'Too weak');
 is($pwd->errstr, 'Passwords are not allowed to contain control sequences', 'control sequences');
 is($pwd->err, 2, 'Error code');
 
+ok($pwd->strong('Das ist mein Versuch einer langen Phrase 999'), 'Space is fine');
+is($pwd->errstr, '', 'No error');
 
 ok(!$pwd->strong("bbbbbbbbb"), 'Too weak');
 is($pwd->errstr, 'Passwords are not allowed to consist of repeating characters only', 'repeating characters');
