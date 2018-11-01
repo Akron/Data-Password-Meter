@@ -155,7 +155,7 @@ No dependencies other than core.
 =head1 COPYRIGHT AND LICENSE
 
 Copyright (C) 2006, Steve Moitozo,
-(C) 2013-2016, L<Nils Diewald|http://nils-diewald.de>.
+(C) 2013-2018, L<Nils Diewald|http://nils-diewald.de>.
 
 Licensed under the MIT License
 
